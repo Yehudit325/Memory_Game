@@ -1,0 +1,15 @@
+.card {
+  background-color: grey;
+  height: 100px;
+  width: 100px;
+  margin: 10px;
+  float: left;
+  display: inline-block;
+  border-radius: 10px;
+}
+
+#board {
+  width: 480px;  /* question to self: why not 480 by calculation?? */
+  border-radius: 10px;
+  background-color: blue;
+}
