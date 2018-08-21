@@ -1,15 +1,40 @@
+body {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+}
+
+#score {
+  width: 350px;
+  margin-bottom: 15px;
+}
+
+.stars, .restart {
+    display: inline-block;
+  }
+
+.restart {
+    float: right;
+    margin-right: 20px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
 .card {
-  background-color: grey;
+  background-color: #000066;
   height: 100px;
   width: 100px;
   margin: 10px;
-  float: left;
+  /* float: left; */
   display: inline-block;
   border-radius: 10px;
 }
 
 #board {
-  width: 480px;  /* question to self: why not 480 by calculation?? */
+  width: 492px;  /* question to self: why not 480 by calculation?? */
+  height: 492px;
   border-radius: 10px;
-  background-color: blue;
+  background: linear-gradient(to bottom right, #00ccff 0%, #cc66ff 80%);
+  padding: 10px;
 }
