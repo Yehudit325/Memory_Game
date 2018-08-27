@@ -29,12 +29,28 @@ body {
   /* float: left; */
   display: inline-block;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+  font-size: 0;
 }
 
 #board {
-  width: 492px;  /* question to self: why not 480 by calculation?? */
-  height: 492px;
+  width: 480px;  /* question to self: why not 480 by calculation?? */
+  height: 480px;
   border-radius: 10px;
   background: linear-gradient(to bottom right, #00ccff 0%, #cc66ff 80%);
   padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+}
+
+.card.open {
+    /* transform: rotateY(0); */
+    background: #ccccff;
+    cursor: default;
+    font-size: 33px;
 }
