@@ -23,6 +23,7 @@ body {
 
 .card {
   background-color: #000066;
+  border: 3px solid #000066;
   height: 100px;
   width: 100px;
   margin: 10px;
@@ -37,8 +38,8 @@ body {
 }
 
 #board {
-  width: 480px;  /* question to self: why not 480 by calculation?? */
-  height: 480px;
+  width: 504px;  /* question to self: why not 480 by calculation?? */
+  height: 504px;
   border-radius: 10px;
   background: linear-gradient(to bottom right, #00ccff 0%, #cc66ff 80%);
   padding: 10px;
@@ -51,6 +52,11 @@ body {
 .card.open {
     /* transform: rotateY(0); */
     background: #ccccff;
+    border: 3px solid #ccccff;
     cursor: default;
     font-size: 33px;
+}
+
+.card.match {
+  border: 3px solid #00ff00;
 }

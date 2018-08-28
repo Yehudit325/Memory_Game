@@ -4,20 +4,37 @@ let symbols = ['&#127804', '&#127804', '&#127856', '&#127856', '&#127880',
 
 let opened = [];
 
+let allOpen = 0;
+let moves = 0;
+
 assign();
 
 document.getElementsByClassName("restart")[0].addEventListener("click", assign);
 
-for (let i = 0; i < symbols.length; i++) {
-  let currCard = document.getElementsByClassName("card")[i];
-  currCard.addEventListener("click", flip);
+function addClick() {
+  for (let i = 0; i < symbols.length; i++) {
+    let currCard = document.getElementsByClassName("card")[i];
+    currCard.addEventListener("click", flip);
+  }
+}
+
+function reset() {
+  for (let i = 0; i < symbols.length; i++) {
+    let currCard = document.getElementsByClassName("card")[i];
+    currCard.innerHTML = symbols[i];
+    currCard.classList.remove("open");
+    currCard.classList.remove("match");
+  }
+  document.getElementById("star3").innerHTML = "★";
+  document.getElementById("star2").innerHTML = "★";
 }
 
 function assign() {
   shuffle();
-  for (let i = 0; i < symbols.length; i++) {
-    document.getElementsByClassName("card")[i].innerHTML = symbols[i];
-  }
+  moves = 0;
+  document.getElementById("moves").innerHTML = moves;
+  addClick();
+  reset();
 }
 
 function shuffle() {
@@ -28,24 +45,58 @@ function shuffle() {
 }
 
  function flip(x) {
-  if (x.target.classList.length === 1) {
-      x.target.classList.add("open");
-  } else {
-      x.target.classList.remove("open");
-  }
+   if (opened.length <= 1) {
+     opened.push(x.target);
+     x.target.classList.add("open");
+   }
+
+   if (opened.length === 2) {
+     ++moves;
+     document.getElementById("moves").innerHTML = moves;
+     setTimeout(checkMatch, 1000);
+     stars();
+   }
  }
 
-function addCard(x) {
-  if (opened.length <= 1) {
-    opened.push(x);
+
+
+function checkMatch() {
+  if (opened[0].innerHTML === opened[1].innerHTML) {
+    foundMatch();
   }
+  else {
+    //animation + red color
+    opened[0].classList.remove("open");
+    opened[1].classList.remove("open");
+  }
+  opened.length = 0;
+}
+
+function winGame() {
 
 }
 
+function foundMatch() {
+  // animation
+  // change color
+  opened[0].removeEventListener("click", flip);
+  opened[1].removeEventListener("click", flip);
 
-function checkMatch(x) {
-  if (opened[0] === opened[1]) {
-    opened[0].removeEventListener("click", flip);
-    opened[1].removeEventListener("click", flip);
+  opened[0].classList.add("match");
+  opened[1].classList.add("match");
+  ++allOpen;
+
+  if (allOpen === 8) {
+    winGame();
+  }
+}
+
+function stars() {
+  if (moves > 10) {
+    document.getElementById("star3").innerHTML = "☆";
+  }
+
+  if (moves > 16) {
+    document.getElementById("star2").innerHTML = "☆";
   }
 }
