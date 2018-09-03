@@ -27,6 +27,10 @@ function reset() {
   }
   document.getElementById("star3").innerHTML = "★";
   document.getElementById("star2").innerHTML = "★";
+
+  for (let i = 0; i < 16; i++) {
+    document.getElementsByClassName("card")[i].style.display = "visible";
+  }
 }
 
 function assign() {
@@ -45,15 +49,19 @@ function shuffle() {
 }
 
  function flip(x) {
-   if (opened.length <= 1) {
-     opened.push(x.target);
-     x.target.classList.add("open");
+   let currCard = x.target;
+   if (opened.length <= 1 && currCard != opened[0]) {
+     opened.push(currCard);
+     currCard.classList.add("open");
    }
+
+/*** BUG - IF 2 CARDS ARE OPENED AND CLICKED TWICE BEFORE CLOSED, MOVES IS COUNTED ***/
+/** console error when trying to click something when 2 cards are opened **/
 
    if (opened.length === 2) {
      ++moves;
      document.getElementById("moves").innerHTML = moves;
-     setTimeout(checkMatch, 1000);
+     setTimeout(checkMatch, 500);
      stars();
    }
  }
@@ -73,8 +81,13 @@ function checkMatch() {
 }
 
 function winGame() {
+  for (let i = 0; i < 16; i++) {
+    document.getElementsByClassName("card")[i].style.visibility = "hidden";
+  }
 
 }
+
+/**** BUG - DOUBLE CLICK ON CARD TURNS GREEN -fixed******/
 
 function foundMatch() {
   // animation
@@ -92,11 +105,11 @@ function foundMatch() {
 }
 
 function stars() {
-  if (moves > 10) {
+  if (moves > 12) {
     document.getElementById("star3").innerHTML = "☆";
   }
 
-  if (moves > 16) {
+  if (moves > 20) {
     document.getElementById("star2").innerHTML = "☆";
   }
 }
